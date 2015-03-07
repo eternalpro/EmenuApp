@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_welcome"
+    tools:context=".LanguageSelectionActivity">
+
+    <ImageView
+        android:id="@+id/v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnChinese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="330dp"
+        android:background="@drawable/btn_chinese"
+        android:scaleType="center" />
+
+    <Button
+        android:id="@+id/btnFrancais"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btnChinese"
+        android:background="@drawable/btn_france"
+        android:layout_alignLeft="@id/btnChinese"
+        android:layout_marginLeft="150dp"
+        android:layout_marginBottom="40dp" />
+
+    <Button
+        android:id="@+id/btnEnglish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btnFrancais"
+        android:background="@drawable/btn_english"
+        android:layout_alignLeft="@id/btnFrancais"
+        android:layout_marginLeft="150dp"
+        android:layout_marginBottom="40dp" />
+
+</RelativeLayout>

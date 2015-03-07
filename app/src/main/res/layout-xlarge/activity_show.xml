@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_show"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/mymenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_menu"
+            android:scaleType="center" />
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignRight="@id/mymenu"
+            android:layout_below="@id/mymenu"
+            android:padding="5dp">
+
+            <FrameLayout
+                android:id="@+id/buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"></FrameLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="3dp">
+
+        <ImageView
+            android:id="@+id/top_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_top" />
+
+        <com.yuansewenhua.emenu.customview.OrderReviewTextView
+            android:id="@+id/orderreviewtextview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignLeft="@id/top_review"
+            android:layout_alignRight="@id/top_review"
+            android:layout_alignTop="@id/top_review"
+            android:layout_alignBottom="@id/top_review"
+            android:paddingLeft ="150dp"
+            android:paddingRight="20dp"
+            android:textSize="20dp"
+            android:textColor="@android:color/black"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:gravity="center_vertical"
+            android:singleLine="true"/>
+
+        <ImageView
+            android:id="@+id/rightside"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/top_review"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_rightside" />
+
+        <TextView
+            android:id="@+id/rightsidetextview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_alignBottom="@id/rightside"
+            android:layout_alignLeft="@id/rightside"
+            android:layout_alignRight="@id/rightside"
+            android:layout_alignTop="@id/rightside"
+            android:padding="12dp"
+            android:textColor="@android:color/background_dark" />
+
+
+        <com.yuansewenhua.emenu.customview.EMFlipper
+            android:id="@+id/flipper"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/top_review"
+            android:layout_toLeftOf="@id/rightside"></com.yuansewenhua.emenu.customview.EMFlipper>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
