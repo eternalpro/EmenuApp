@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/orderreviewitem"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <!-- 这是临时的带加减的一列布局的样式 -->
+    <Button
+        android:id="@+id/jia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/arrow_up_float"
+        android:layout_weight="0"/>
+
+    <TextView
+        android:id="@+id/orderName"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/jian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/arrow_down_float"
+        android:layout_weight="0"/>
+
+    <!--  以下是左右两列布局的样式  -->
+    <!--<TextView-->
+        <!--android:id="@+id/itemleft"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="bottom"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="20dp">-->
+    <!--</TextView>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/itemright"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="bottom"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:textColor="@android:color/black"-->
+        <!--android:textSize="20dp">-->
+    <!--</TextView>-->
+</LinearLayout>

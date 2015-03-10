@@ -5,6 +5,7 @@
     android:background="@drawable/bg_welcome"
     tools:context=".LanguageSelectionActivity">
 
+
     <ImageView
         android:id="@+id/v"
         android:layout_width="wrap_content"
