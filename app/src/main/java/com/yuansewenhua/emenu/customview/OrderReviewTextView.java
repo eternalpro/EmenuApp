@@ -18,9 +18,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 主界面顶部数据预览
  * Created by YangJD on 2014/12/14.
  */
 public class OrderReviewTextView extends TextView implements View.OnClickListener {
+
+    public List<GoodsForOrder> getGoodsList() {
+        return goodsList;
+    }
 
     private List<GoodsForOrder> goodsList;
     private PopWinCheckOrder pop;
@@ -29,7 +34,7 @@ public class OrderReviewTextView extends TextView implements View.OnClickListene
         this.goodsList = new ArrayList<GoodsForOrder>();
         this.setTypeface(CommonUtils.getCustomTypeface(this.getContext(), "emenu.ttf"));
         this.setOnClickListener(this);
-        pop = new PopWinCheckOrder(this.getContext(),this.goodsList);
+        pop = new PopWinCheckOrder(this);
     }
 
     public <T> void addOne(T entity) {
@@ -68,6 +73,14 @@ public class OrderReviewTextView extends TextView implements View.OnClickListene
         if (!alreadyInThere) {
             this.goodsList.add(oneGoods);
         }
+
+        setText();
+    }
+
+    /**
+     * 动态根据goodsList设置显示的文字
+     */
+    public void setText(){
         String text = "";
         int sequence = 1;
         for (GoodsForOrder g : this.goodsList) {

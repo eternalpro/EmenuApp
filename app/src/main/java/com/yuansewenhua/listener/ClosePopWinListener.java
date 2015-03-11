@@ -7,15 +7,11 @@ import android.widget.PopupWindow;
 public class ClosePopWinListener implements View.OnClickListener {
         private PopupWindow popupWindow;
 
-        public PopupWindow getPopupWindow() {
-            return popupWindow;
-        }
+    public ClosePopWinListener(PopupWindow popupWindow) {
+        this.popupWindow = popupWindow;
+    }
 
-        public void setPopupWindow(PopupWindow popupWindow) {
-            this.popupWindow = popupWindow;
-        }
-
-        @Override
+    @Override
         public void onClick(View v) {
             popupWindow.dismiss();
         }

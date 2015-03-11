@@ -1,6 +1,11 @@
 package com.yuansewenhua.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Binder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +17,7 @@ import com.yuansewenhua.dao.Drinks;
 import com.yuansewenhua.dao.Foods;
 import com.yuansewenhua.dto.GoodsForOrder;
 import com.yuansewenhua.emenu.R;
+import com.yuansewenhua.emenu.customview.OrderReviewTextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,25 +31,22 @@ public class OrderReviewAdapter extends BaseAdapter {
 
     private Context context;
     private List<GoodsForOrder> orderList;
+    private OrderReviewTextView textView;
 
-    public OrderReviewAdapter(Context context) {
+
+    public OrderReviewAdapter(Context context, OrderReviewTextView textView) {
         this.context = context;
-        orderList = new ArrayList<GoodsForOrder>();
-    }
-
-    public void setData(List<GoodsForOrder> orderList) {
-        this.orderList = orderList;
+        this.textView = textView;
+        orderList = textView.getGoodsList();
     }
 
     @Override
     public int getCount() {
-        return this.orderList.size();
-//        if (this.orderList.size() % 2 == 0) {
-//            return this.orderList.size() / 2;
-//        } else {
-//            return this.orderList.size() / 2 + 1;
-//        }
-
+        if (this.orderList.size() % 2 == 0) {
+            return this.orderList.size() / 2;
+        } else {
+            return this.orderList.size() / 2 + 1;
+        }
     }
 
     @Override
@@ -61,7 +64,7 @@ public class OrderReviewAdapter extends BaseAdapter {
         //取得条目界面
         View itemView = LayoutInflater.from(this.context).inflate(R.layout.orderiten, null);
         //取得条目内容
-        final GoodsForOrder item = this.orderList.get(i);
+        GoodsForOrder item = this.orderList.get(i);
         //这是临时的单排显示item显示样式，包含增减菜品数量按钮
         //取得条目中包含的两个按钮（减少和增加）
         Button btnjia = (Button)itemView.findViewById(R.id.jia);
@@ -70,42 +73,73 @@ public class OrderReviewAdapter extends BaseAdapter {
         TextView textView = (TextView)itemView.findViewById(R.id.orderName);
         textView.setText(item.getName() + " ×" + item.getCount());
         //点击上箭头，条目中的菜品数量加1
-        btnjia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                item.setCount(item.getCount()+1);
-                ((TextView)view.findViewById(R.id.orderName)).setText(item.getName() + " ×" + item.getCount());
-            }
-        });
+        btnjia.setOnClickListener(new BtnjiaClickListener(item));
         //点击下箭头，条目中的菜品数量减1
-        btnjian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                item.setCount(item.getCount()-1);
-                ((TextView)view.findViewById(R.id.orderName)).setText(item.getName() + " ×" + item.getCount());
-            }
-        });
+        btnjian.setOnClickListener(new BtnjianClickListener(item));
 
-        //以下是双排显示时的item样式
-//        TextView leftTextView = (TextView) itemView.findViewById(R.id.itemleft);
-//        TextView rightTextView = (TextView) itemView.findViewById(R.id.itemright);
-//        GoodsForOrder left = this.orderList.get(i * 2);
-//        if (left.getCount() <= 1) {
-//            leftTextView.setText(left.getName());
-//        } else {
-//            leftTextView.setText(left.getName() + "×" + left.getCount());
-//        }
-//        GoodsForOrder right;
-//        try {
-//            right = this.orderList.get(i * 2 + 1);
-//        } catch (IndexOutOfBoundsException e) {
-//            return itemView;
-//        }
-//        if (right.getCount() <= 1) {
-//            rightTextView.setText(right.getName());
-//        } else {
-//            rightTextView.setText(right.getName() + "×" + right.getCount());
-//        }
         return itemView;
+    }
+
+    /**
+     * 增加按钮事件
+     */
+    class BtnjiaClickListener implements View.OnClickListener {
+        private GoodsForOrder item;
+
+        BtnjiaClickListener(GoodsForOrder item) {
+            this.item = item;
+        }
+
+        @Override
+        public void onClick(View v) {
+            item.setCount(item.getCount() + 1);
+            notifyDataSetChanged();// 通知数据刷新
+            textView.setText();
+        }
+    }
+
+    /**
+     * 减少按钮事件
+     */
+    class BtnjianClickListener implements View.OnClickListener{
+        private GoodsForOrder item;
+        private
+
+        BtnjianClickListener(GoodsForOrder item) {
+            this.item = item;
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            if(item.getCount() <= 1){
+                new AlertDialog.Builder(OrderReviewAdapter.this.context)
+                        .setTitle("注意")
+                        .setMessage("确认从订单中清楚此项吗？")
+                        .setPositiveButton("是", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                clearItem(item);
+                                notifyDataSetChanged(); // 通知数据刷新
+                                textView.setText();
+                            }
+                        })
+                        .setNegativeButton("否", null)
+                        .show();
+            }else{
+                item.setCount(item.getCount() - 1);
+                textView.setText();
+            }
+            notifyDataSetChanged(); // 通知数据刷新
+        }
+
+        /**
+         * 清除条目
+         * @param item
+         */
+        private void clearItem(GoodsForOrder item) {
+            orderList.remove(item);
+        }
+
     }
 }

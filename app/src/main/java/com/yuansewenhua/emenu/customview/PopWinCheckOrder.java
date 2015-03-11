@@ -24,6 +24,7 @@ import com.yuansewenhua.dao.Drinks;
 import com.yuansewenhua.dao.Foods;
 import com.yuansewenhua.dto.GoodsForOrder;
 import com.yuansewenhua.emenu.R;
+import com.yuansewenhua.listener.ClosePopWinListener;
 import com.yuansewenhua.utils.NetUtils;
 
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
@@ -48,25 +49,30 @@ public class PopWinCheckOrder extends PopupWindow implements View.OnClickListene
     private View contentView;
     private TextView title;
     private ImageView btnCheckOrder;
-    private ImageView btnClosePopwin;
     private ImageView btnSendOrder;
     private ObjectAnimator visToInvis;
     private ObjectAnimator invisToVis;
+    private ImageView closePopWin;
 
-    public PopWinCheckOrder(Context context, List<GoodsForOrder> orderList) {
+
+    public PopWinCheckOrder(OrderReviewTextView orderReviewTextView) {
         super(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        this.context = context;
+        this.context = orderReviewTextView.getContext();
         contentView = LayoutInflater.from(context).inflate(R.layout.popwin_order, null);
         this.setContentView(contentView);
-        this.orderList = orderList;
+        this.orderList = orderReviewTextView.getGoodsList();
         ListView orderListView = (ListView) contentView.findViewById(R.id.orderlistview);
         title = (TextView) contentView.findViewById(R.id.poptitle);
         this.btnCheckOrder = (ImageView) contentView.findViewById(R.id.btnCheckOrderOK);
         this.btnSendOrder = (ImageView) contentView.findViewById(R.id.btnSendOrder);
+        this.closePopWin = (ImageView) contentView.findViewById(R.id.btn_closepopwin);
+
         this.btnCheckOrder.setOnClickListener(this);
-        this.btnClosePopwin = (ImageView)contentView.findViewById(R.id.btn_closepopwin);
-        OrderReviewAdapter adapter = new OrderReviewAdapter(this.context);
-        adapter.setData(this.orderList);
+
+        ClosePopWinListener popWinListener = new ClosePopWinListener(this);
+        closePopWin.setOnClickListener(popWinListener);
+
+        OrderReviewAdapter adapter = new OrderReviewAdapter(this.context, orderReviewTextView);
         orderListView.setAdapter(adapter);
         this.btnSendOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,12 +83,6 @@ public class PopWinCheckOrder extends PopupWindow implements View.OnClickListene
                 connectFuture.awaitUninterruptibly();
                 connectFuture.getSession().getCloseFuture().awaitUninterruptibly();
                 socketConnector.dispose();
-            }
-        });
-        this.btnClosePopwin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopWinCheckOrder.this.dismiss();
             }
         });
     }
@@ -115,15 +115,5 @@ public class PopWinCheckOrder extends PopupWindow implements View.OnClickListene
 
     }
 
-    public static void main(String[] args){
-        NioSocketConnector socketConnector = new NioSocketConnector();
-        DefaultIoFilterChainBuilder chain = socketConnector.getFilterChain();
-        ProtocolCodecFilter filter = new ProtocolCodecFilter(new ObjectSerializationCodecFactory());
-        chain.addLast("objectFilter",filter);
-        socketConnector.setHandler(new NetUtils());
-        ConnectFuture connectFuture = socketConnector.connect(new InetSocketAddress("192.168.31.244",8899));
-        connectFuture.awaitUninterruptibly();
-        connectFuture.getSession().getCloseFuture().awaitUninterruptibly();
-        socketConnector.dispose();
-    }
+
 }
