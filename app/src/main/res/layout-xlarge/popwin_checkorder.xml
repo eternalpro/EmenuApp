@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -11,29 +17,22 @@
         android:background="@drawable/bg_checkorder"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/poptitle"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="2">
-
-            <TextView
-                android:id="@+id/poptitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="25dp" />
-
-            </RelativeLayout>
-
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:text="fdsafdsaf"
+            android:textSize="25dp" />
 
         <ListView
             android:id="@+id/orderlistview"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:divider="@null"
-            android:layout_weight="20">
-        </ListView>
+            android:layout_marginTop="10dp"
+            android:layout_weight="20"
+            android:divider="@null" />
     </LinearLayout>
 
     <ImageView
@@ -44,4 +43,14 @@
         android:layout_weight="1"
         android:scaleType="fitCenter"
         android:src="@drawable/btn_checkorder" />
-</LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btn_closepopwin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:src="@android:drawable/ic_delete"/>
+</FrameLayout>

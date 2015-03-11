@@ -48,6 +48,7 @@ public class PopWinCheckOrder extends PopupWindow implements View.OnClickListene
     private View contentView;
     private TextView title;
     private ImageView btnCheckOrder;
+    private ImageView btnClosePopwin;
     private ImageView btnSendOrder;
     private ObjectAnimator visToInvis;
     private ObjectAnimator invisToVis;
@@ -63,6 +64,7 @@ public class PopWinCheckOrder extends PopupWindow implements View.OnClickListene
         this.btnCheckOrder = (ImageView) contentView.findViewById(R.id.btnCheckOrderOK);
         this.btnSendOrder = (ImageView) contentView.findViewById(R.id.btnSendOrder);
         this.btnCheckOrder.setOnClickListener(this);
+        this.btnClosePopwin = (ImageView)contentView.findViewById(R.id.btn_closepopwin);
         OrderReviewAdapter adapter = new OrderReviewAdapter(this.context);
         adapter.setData(this.orderList);
         orderListView.setAdapter(adapter);
@@ -75,6 +77,12 @@ public class PopWinCheckOrder extends PopupWindow implements View.OnClickListene
                 connectFuture.awaitUninterruptibly();
                 connectFuture.getSession().getCloseFuture().awaitUninterruptibly();
                 socketConnector.dispose();
+            }
+        });
+        this.btnClosePopwin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopWinCheckOrder.this.dismiss();
             }
         });
     }

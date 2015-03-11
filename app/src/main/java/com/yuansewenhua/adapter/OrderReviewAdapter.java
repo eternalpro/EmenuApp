@@ -37,11 +37,12 @@ public class OrderReviewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        if (this.orderList.size() % 2 == 0) {
-            return this.orderList.size() / 2;
-        } else {
-            return this.orderList.size() / 2 + 1;
-        }
+        return this.orderList.size();
+//        if (this.orderList.size() % 2 == 0) {
+//            return this.orderList.size() / 2;
+//        } else {
+//            return this.orderList.size() / 2 + 1;
+//        }
 
     }
 
@@ -73,6 +74,7 @@ public class OrderReviewAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 item.setCount(item.getCount()+1);
+                ((TextView)view.findViewById(R.id.orderName)).setText(item.getName() + " ×" + item.getCount());
             }
         });
         //点击下箭头，条目中的菜品数量减1
@@ -80,6 +82,7 @@ public class OrderReviewAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 item.setCount(item.getCount()-1);
+                ((TextView)view.findViewById(R.id.orderName)).setText(item.getName() + " ×" + item.getCount());
             }
         });
 
