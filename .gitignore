@@ -1,7 +1,6 @@
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
+
 .DS_Store
 /build
 
@@ -32,11 +31,5 @@ proguard/
 # Log Files
 *.log
 
-.idea/.name
-.idea/gradle.xml
-.idea/inspectionProfiles/profiles_settings.xml
-.idea/inspectionProfiles/Project_Default.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
-app/app.iml
+.idea
+*.iml
