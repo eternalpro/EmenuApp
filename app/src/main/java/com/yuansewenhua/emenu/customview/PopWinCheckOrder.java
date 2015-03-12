@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.yuansewenhua.dto.GoodsForOrder;
 import com.yuansewenhua.emenu.R;
 import com.yuansewenhua.listener.ClosePopWinListener;
 import com.yuansewenhua.utils.NetUtils;
+import com.yuansewenhua.utils.PopupWindowUtils;
 
 import org.apache.mina.core.filterchain.DefaultIoFilterChainBuilder;
 import org.apache.mina.core.future.ConnectFuture;
@@ -58,6 +60,9 @@ public class PopWinCheckOrder extends PopupWindow implements View.OnClickListene
     public PopWinCheckOrder(OrderReviewTextView orderReviewTextView) {
         super(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         this.context = orderReviewTextView.getContext();
+
+        PopupWindowUtils.setCloseOnOutsideTouched(this);
+
         contentView = LayoutInflater.from(context).inflate(R.layout.popwin_order, null);
         this.setContentView(contentView);
         this.orderList = orderReviewTextView.getGoodsList();

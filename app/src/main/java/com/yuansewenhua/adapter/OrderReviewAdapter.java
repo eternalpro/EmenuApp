@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Binder;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,13 +73,22 @@ public class OrderReviewAdapter extends BaseAdapter {
         Button btnjian  = (Button)itemView.findViewById(R.id.jian);
         //取得条目中包含的TextView
         TextView textView = (TextView)itemView.findViewById(R.id.orderName);
-        textView.setText(item.getName() + " ×" + item.getCount());
+        textView.setText(getItemText(item));
         //点击上箭头，条目中的菜品数量加1
         btnjia.setOnClickListener(new BtnjiaClickListener(item));
         //点击下箭头，条目中的菜品数量减1
         btnjian.setOnClickListener(new BtnjianClickListener(item));
 
         return itemView;
+    }
+
+    /**
+     * 根据一条记录,格式化显示在界面上的文字
+     * @param item
+     * @return
+     */
+    private String getItemText(GoodsForOrder item){
+        return item.getName() + "(¥" + item.getPrice() + ")"+ " ×" + item.getCount() + " = " + (Double.parseDouble(item.getPrice()) * item.getCount());
     }
 
     /**
