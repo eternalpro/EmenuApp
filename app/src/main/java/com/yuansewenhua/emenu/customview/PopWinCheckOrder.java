@@ -61,7 +61,7 @@ public class PopWinCheckOrder extends PopupWindow implements View.OnClickListene
         super(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         this.context = orderReviewTextView.getContext();
 
-        PopupWindowUtils.setCloseOnOutsideTouched(this);
+//        PopupWindowUtils.setCloseOnOutsideTouched(this);
 
         contentView = LayoutInflater.from(context).inflate(R.layout.popwin_order, null);
         this.setContentView(contentView);
