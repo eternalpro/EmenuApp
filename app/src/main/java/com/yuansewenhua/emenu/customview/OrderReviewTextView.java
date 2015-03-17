@@ -13,6 +13,7 @@ import com.yuansewenhua.dto.GoodsForOrder;
 import com.yuansewenhua.utils.CommonUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,6 +94,10 @@ public class OrderReviewTextView extends TextView implements View.OnClickListene
             }
             sequence++;
         }
+
+        // 列表数据为空
+        if(goodsList == null && goodsList.size() == 0)
+            this.setText();
     }
 
     public OrderReviewTextView(Context context) {
