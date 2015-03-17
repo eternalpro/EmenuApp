@@ -87,17 +87,12 @@ public class OrderReviewTextView extends TextView implements View.OnClickListene
         for (GoodsForOrder g : this.goodsList) {
             if (g.getCount() > 1) {
                 text += " " + sequence + "." + g.getName() + "×" + g.getCount();
-                this.setText(text);
             } else {
                 text += " " + sequence + "." + g.getName();
-                this.setText(text);
             }
             sequence++;
         }
-
-        // 列表数据为空
-        if(goodsList == null && goodsList.size() == 0)
-            this.setText();
+        this.setText(text);
     }
 
     public OrderReviewTextView(Context context) {
